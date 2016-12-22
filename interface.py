@@ -85,13 +85,13 @@ def main(argv):
     if len(argv) == 2:
         if verify_file_exists(argv[1]):
             d = create_ratings(argv[1])
-        e = {}
-        for key in d:
-            e[key] = d[key].rating
-#        print e
-        sorted_e = sorted(e.items(), key = operator.itemgetter(1)) # this is a list
-        sorted_e.reverse()
-        print_rankings(sorted_e, d)
+            e = {}
+            for key in d:
+                e[key] = d[key].rating
+#            print e
+            sorted_e = sorted(e.items(), key = operator.itemgetter(1)) # this is a list
+            sorted_e.reverse()
+            print_rankings(sorted_e, d)
     else:
         print "Usage: python interface.py [filename]"
         
