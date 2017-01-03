@@ -20,18 +20,44 @@ def get_info(username, api_key, url, info_str, t_str):
 # m: matches_str, this is a string that contains the contents of the matches json
 # i: ids_str, this is a string that contains the contents of the ids json
 def parse_matches_ids_strs(m, i):
-    pairs = []
     m_list = m.split("}}")
     i_list = i.split("}}")
+    # make a list of matches (winner, loser)
+    match_pairs = []
     for item in m_list:
-        print item
-        print
-    print
+        if item == "]":
+            break
+        begin_index = item.find("winner_id")
+        end_index = item.find(",\"started")
+        substr = item[begin_index:end_index]
+        # get winner and loser id
+        win_begin_index = substr.find("\":") + 2
+        win_end_index = substr.find(",\"")
+        winid = substr[win_begin_index:win_end_index]
+        los_begin_index = substr.find("loser_id\":") + 10
+        losid = substr[los_begin_index:]
+        match_pairs.append((winid, losid))
+    # make a dictionary of ids {id: username}
+    id_pairs = {}
     for item in i_list:
-        print item
-        print
-    assert(False)
-    pairs.append((m, i))
+        begin_index = item.find("\"id\"") + 5
+        end_index = item.find(",\"tournament")
+        id_num = item[begin_index:end_index]
+        bi = item.find("\"name\":") + 8
+        ei = item.find("\"seed\":") - 2
+        name = item[bi:ei]
+        name = name.replace(" ", "_")
+        name = name.lower()
+        id_pairs[id_num] = name
+    # using list of matches, replace ids with usernames
+    print "number of participants: %d" % (len(id_pairs) - 1)
+    pairs = []
+    for match in match_pairs:
+        w = id_pairs[match[0]]
+        l = id_pairs[match[1]]
+        pairs.append((w, l))
+    # return pairs
+    print "number of matches: %d" % len(pairs)
     return pairs
 
 # returns a list of tuples (winner, loser)
@@ -53,10 +79,14 @@ def main(argv):
         match_pairs = get_challonge_matches(argv[1], argv[2], argv[3])
         filename_matches = parse_link(argv[3]) + '_matches.json'
         f_matches = open(filename_matches, 'w')
+        first = True
         for pair in match_pairs:
+            if first:
+                first = False
+            else:
+                f_matches.write('\n')
             line = pair[0] + " " + pair[1]
             f_matches.write(line)
-            f_matches.write('\n')
         f_matches.close()
     else:
         print "Usage: python make_matches_from_challonge.py [username] [api-key] [url]"
