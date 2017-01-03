@@ -5,6 +5,12 @@ Usage:
 python interface.py [filename_containing_matches]
 ```
 
+OR
+
+```
+python make_matches_from_challonge.py [username] [api-key] [url]
+```
+
 Tournaments included in 2016-17 ranking period:
 - http://challonge.com/stanfordwelcome
 - http://challonge.com/lantanalounge1
