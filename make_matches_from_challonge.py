@@ -77,7 +77,7 @@ def get_challonge_matches(username, api_key, url):
 def main(argv):
     if len(argv) == 4:
         match_pairs = get_challonge_matches(argv[1], argv[2], argv[3])
-        filename_matches = parse_link(argv[3]) + '_matches.json'
+        filename_matches = 'matches/' + parse_link(argv[3]) + '_matches.json'
         f_matches = open(filename_matches, 'w')
         first = True
         for pair in match_pairs:
