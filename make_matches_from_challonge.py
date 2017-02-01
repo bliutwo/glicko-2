@@ -89,7 +89,7 @@ def main(argv):
             f_matches.write(line)
         f_matches.close()
     else:
-        print "Usage: python make_matches_from_challonge.py [username] [api-key] [url]"
+        print "Usage: python make_matches_from_challonge.py [username] [api-key] challonges.txt"
 
 if __name__ == "__main__":
     main(sys.argv)
