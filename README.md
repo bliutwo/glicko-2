@@ -2,7 +2,7 @@ Uses glicko-2 rating system, documented here http://www.glicko.net/glicko.html
 
 Usage:
 ```
-python make_matches_from_challonge.py [username] [api-key] [challonge-url]
+python make_matches_from_challonge.py [username] [api-key] challonges.txt
 ```
 THEN:
 
