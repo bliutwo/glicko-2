@@ -61,23 +61,31 @@ def parse_matches_ids_strs(m, i):
     return pairs
 
 # returns a list of tuples (winner, loser)
-def get_challonge_matches(username, api_key, url):
-    t_str = parse_link(url)
-    matches = get_info(username, api_key, url, "/matches.json", t_str)
-    ids = get_info(username, api_key, url, "/participants.json", t_str)
-    matches_str = ""
-    for l in matches:
-        matches_str += (l)
-    ids_str = ""
-    for l in ids:
-        ids_str += l
-    match_pairs = parse_matches_ids_strs(matches_str, ids_str)
-    return match_pairs
+def get_challonge_matches(username, api_key, multiple_urls):
+    all_match_pairs = []
+    with open(multiple_urls) as f:
+        for line in f:
+            url = line[:-1] # we don't want the newline char included
+            print "BRACKET: %s" % url
+            t_str = parse_link(url)
+            matches = get_info(username, api_key, url, "/matches.json", t_str)
+            ids = get_info(username, api_key, url, "/participants.json", t_str)
+            matches_str = ""
+            for l in matches:
+                matches_str += (l)
+            ids_str = ""
+            for l in ids:
+                ids_str += l
+            match_pairs = parse_matches_ids_strs(matches_str, ids_str)
+            print
+            for p in match_pairs:
+                all_match_pairs.append(p)
+    return all_match_pairs
     
 def main(argv):
     if len(argv) == 4:
         match_pairs = get_challonge_matches(argv[1], argv[2], argv[3])
-        filename_matches = 'matches/' + parse_link(argv[3]) + '_matches.json'
+        filename_matches = 'matches/' + 'challonge_matches.txt'
         f_matches = open(filename_matches, 'w')
         first = True
         for pair in match_pairs:
@@ -88,6 +96,7 @@ def main(argv):
             line = pair[0] + " " + pair[1]
             f_matches.write(line)
         f_matches.close()
+        print "Added %s" % filename_matches
     else:
         print "Usage: python make_matches_from_challonge.py [username] [api-key] challonges.txt"
 
