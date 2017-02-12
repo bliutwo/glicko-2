@@ -65,7 +65,10 @@ def get_challonge_matches(username, api_key, multiple_urls):
     all_match_pairs = []
     with open(multiple_urls) as f:
         for line in f:
-            url = line[:-1] # we don't want the newline char included
+            if line[len(line) - 1] == '\n':
+                url = line[:-1] # we don't want the newline char included
+            else:
+                url = line
             print "BRACKET: %s" % url
             t_str = parse_link(url)
             matches = get_info(username, api_key, url, "/matches.json", t_str)
