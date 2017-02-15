@@ -10,6 +10,13 @@ THEN:
 python interface.py [filename_containing_matches]
 ```
 
+To find and replace tags in the resulting matches file,
+
+Usage:
+```
+python find_and_replace.py [filename_containing_matches]
+```
+
 Tournaments included in 2016-17 ranking period:
 - http://challonge.com/stanfordwelcome
 - http://challonge.com/lantanalounge1
