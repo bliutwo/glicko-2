@@ -1,4 +1,0 @@
-finput already
-supports inplace
-finput inplace
-supports stdout
