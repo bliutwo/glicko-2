@@ -2,9 +2,21 @@ import sys
 sys.dont_write_bytecode = True
 import requests
 
+def find_subdomain(url):
+    pattern = "://"
+    s = url.split(pattern,1)[1]
+    if s.startswith('challonge'):
+        return ''
+    else:
+        subdomain = s.split('.challonge', 1)[0]
+        return subdomain
+
 def parse_link(url):
     pattern = "challonge.com/"
-    return url.split(pattern, 1)[1]
+    end = url.split(pattern, 1)[1]
+    subdomain = find_subdomain(url)
+    combo = subdomain + '-' + end
+    return combo
 
 def get_info(username, api_key, url, info_str, t_str):
     l = []
