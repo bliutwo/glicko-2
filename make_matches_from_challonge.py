@@ -61,7 +61,7 @@ def parse_matches_ids_strs(m, i):
         ei = item.find("\"seed\":") - 2
         name = item[bi:ei]
         name = name.replace(" ", "_")
-        name = name.lower()
+        # name = name.lower()
         id_pairs[id_num] = name
     # using list of matches, replace ids with usernames
     print "number of participants: %d" % (len(id_pairs) - 1)

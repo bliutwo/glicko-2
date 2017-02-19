@@ -71,7 +71,9 @@ def create_ratings(fstring):
     d = {}
     for line in f:
         l = line.split()
-        update_players(l[0].lower(), l[1].lower(), d)
+#        update_players(l[0].lower(), l[1].lower(), d)
+        update_players(l[0], l[1], d)
+
     return d
 
 def print_rankings(l, d):
