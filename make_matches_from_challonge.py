@@ -116,7 +116,7 @@ def main(argv):
         f_matches.close()
         print "Added %s" % filename_matches
     else:
-        print "Usage: python make_matches_from_challonge.py [username] [api-key] challonges.txt"
+        print "Usage: python make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls"
 
 if __name__ == "__main__":
     main(sys.argv)
