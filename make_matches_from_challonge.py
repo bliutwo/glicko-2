@@ -1,6 +1,7 @@
 import sys
 sys.dont_write_bytecode = True
 import requests
+import os
 
 def find_subdomain(url):
     pattern = "://"
@@ -9,13 +10,14 @@ def find_subdomain(url):
         return ''
     else:
         subdomain = s.split('.challonge', 1)[0]
-        return subdomain
+        total = subdomain + '-'
+        return total
 
 def parse_link(url):
     pattern = "challonge.com/"
     end = url.split(pattern, 1)[1]
     subdomain = find_subdomain(url)
-    combo = subdomain + '-' + end
+    combo = subdomain + end
     return combo
 
 def get_info(username, api_key, url, info_str, t_str):
@@ -100,7 +102,8 @@ def get_challonge_matches(username, api_key, multiple_urls):
 def main(argv):
     if len(argv) == 4:
         match_pairs = get_challonge_matches(argv[1], argv[2], argv[3])
-        filename_matches = 'matches/' + 'challonge_matches.txt'
+        name = os.path.splitext(argv[3])[0]
+        filename_matches = 'matches/' + name + '_matches.txt'
         f_matches = open(filename_matches, 'w')
         first = True
         for pair in match_pairs:
