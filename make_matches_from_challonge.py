@@ -27,7 +27,7 @@ def get_info(username, api_key, url, info_str, t_str):
                          t_str + info_str, auth = (username, api_key))
     for line in data:
         l.append(line)
-    print "sizeof " + info_str + "_data: " + str(len(l))
+    print("sizeof " + info_str + "_data: " + str(len(l)))
     return l
 
 # arguments:
@@ -64,14 +64,14 @@ def parse_matches_ids_strs(m, i):
         # name = name.lower()
         id_pairs[id_num] = name
     # using list of matches, replace ids with usernames
-    print "number of participants: %d" % (len(id_pairs) - 1)
+    print("number of participants: %d" % (len(id_pairs) - 1))
     pairs = []
     for match in match_pairs:
         w = id_pairs[match[0]]
         l = id_pairs[match[1]]
         pairs.append((w, l))
     # return pairs
-    print "number of matches: %d" % len(pairs)
+    print("number of matches: %d\n" % len(pairs))
     return pairs
 
 # returns a list of tuples (winner, loser)
@@ -83,16 +83,16 @@ def get_challonge_matches(username, api_key, multiple_urls):
                 url = line[:-1] # we don't want the newline char included
             else:
                 url = line
-            print "BRACKET: %s" % url
+            print("BRACKET: %s" % url)
             t_str = parse_link(url)
             matches = get_info(username, api_key, url, "/matches.json", t_str)
             ids = get_info(username, api_key, url, "/participants.json", t_str)
             matches_str = ""
             for l in matches:
-                matches_str += (l)
+                matches_str += l.decode('utf-8')
             ids_str = ""
             for l in ids:
-                ids_str += l
+                ids_str += l.decode('utf-8')
             match_pairs = parse_matches_ids_strs(matches_str, ids_str)
             print
             for p in match_pairs:
@@ -104,19 +104,19 @@ def main(argv):
         match_pairs = get_challonge_matches(argv[1], argv[2], argv[3])
         name = os.path.splitext(argv[3])[0]
         filename_matches = 'matches/' + name + '_matches.txt'
-        f_matches = open(filename_matches, 'w')
+        f_matches = open(filename_matches, 'wb')
         first = True
         for pair in match_pairs:
             if first:
                 first = False
             else:
-                f_matches.write('\n')
+                f_matches.write('\n'.encode('utf-8'))
             line = pair[0] + " " + pair[1]
-            f_matches.write(line)
+            f_matches.write(line.encode('utf-8'))
         f_matches.close()
-        print "Added %s" % filename_matches
+        print("Added %s" % filename_matches)
     else:
-        print "Usage: python make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls"
+        print("Usage: python make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls")
 
 if __name__ == "__main__":
     main(sys.argv)

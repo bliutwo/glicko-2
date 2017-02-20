@@ -10,7 +10,7 @@ def verify_file_exists(fstring):
 #        print "%s exists!" % fstring
         return True
     else:
-        print "%s does NOT exist!" % fstring
+        print("%s does NOT exist!") % fstring
         return False
 
 def match(a, b, d):
@@ -79,7 +79,7 @@ def create_ratings(fstring):
 def print_rankings(l, d):
     i = 1
     for key in l:
-        print "%d. %s, %f" % (i, key, d[key[0]].rd)
+        print("%d. %s, %f" % (i, key, d[key[0]].rd))
         i += 1
 
 def main(argv):
@@ -95,7 +95,7 @@ def main(argv):
             sorted_e.reverse()
             print_rankings(sorted_e, d)
     else:
-        print "Usage: python interface.py [filename]"
+        print("Usage: python interface.py [filename]")
         
         
     # take file or manual input
