@@ -2,12 +2,12 @@ Uses glicko-2 rating system, documented here http://www.glicko.net/glicko.html
 
 Usage:
 ```
-python make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls]
+python3 make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls]
 ```
 THEN:
 
 ```
-python interface.py [filename_containing_matches]
+python3 interface.py [filename_containing_matches]
 ```
 
 To find and replace tags in the resulting matches file,

@@ -103,7 +103,8 @@ def main(argv):
     if len(argv) == 4:
         match_pairs = get_challonge_matches(argv[1], argv[2], argv[3])
         name = os.path.splitext(argv[3])[0]
-        filename_matches = 'matches/' + name + '_matches.txt'
+        # filename_matches = 'matches/' + name + '_matches.txt'
+        filename_matches = name + '_matches.txt'
         f_matches = open(filename_matches, 'wb')
         first = True
         for pair in match_pairs:
