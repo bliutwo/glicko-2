@@ -79,7 +79,7 @@ def create_ratings(fstring):
 def print_rankings(l, d):
     i = 1
     for key in l:
-        print("%d. %s, %f" % (i, key, d[key[0]].rd))
+        print("%d.  %s (%.2f, %.2f)" % (i, key[0], key[1], d[key[0]].rd))
         i += 1
 
 def main(argv):
