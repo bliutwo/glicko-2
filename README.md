@@ -1,6 +1,10 @@
 Uses glicko-2 rating system, documented here http://www.glicko.net/glicko.html
 
 Usage:
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> python3 make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls]
+</code></pre></div></div>
+
 ```
 python3 make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls]
 ```
