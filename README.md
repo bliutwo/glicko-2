@@ -6,7 +6,7 @@ Usage:
 </code></pre></div></div>
 
 ```
-python3 make_matches_from_challonge.py [username] [api-key] [filename_containing_bracket_urls]
+python3 make_matches_from_urls.py [username] [api-key] [filename_containing_bracket_urls]
 ```
 THEN:
 
